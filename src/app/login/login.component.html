@@ -1,0 +1,36 @@
+<div class="row">
+    <div class="col-12">
+      <div class="card rounded shadow-sm border-0">
+        <div class="card-body">
+          <form #loginForm="ngForm">
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><fa-icon [icon]="faAt"></fa-icon></span>
+                </div>
+                <input name="email" #email="ngModel" [(ngModel)]="user.email" type="email" pattern=".*[@].*[.].+" class="form-control" id="email" placeholder="Enter email" required>
+                <div *ngIf="email.invalid && showErrors" class="invalid-feedback d-flex">
+                  Email is invalid
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><fa-icon [icon]="faKey"></fa-icon></span>
+                </div>
+                <input name="password" #password="ngModel" [(ngModel)]="user.password" type="password" class="form-control" id="password" placeholder="Password" required>
+                <div *ngIf="password.invalid && showErrors" class="invalid-feedback d-flex">
+                  Password is invalid.
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary" (click)="loginUser(loginForm)">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  

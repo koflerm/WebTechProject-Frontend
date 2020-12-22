@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { faUser, faHome, faPhone, faAt, faKey, faCreditCard } from '@fortawesome/free-solid-svg-icons';
 import { User } from '../models/user';
 
