@@ -1,1 +1,100 @@
-<p>registration works!</p>
+<div class="row">
+  <div class="col-12">
+    <div class="card rounded shadow-sm border-0">
+      <div class="card-body">
+        <form #registrationForm="ngForm">
+          <div class="form-group">
+            <label for="fullname">Full name</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><fa-icon [icon]="faUser"></fa-icon></span>
+              </div>
+              <input name="name" #name="ngModel" [(ngModel)]="newUser.name" type="text" class="form-control" id="fullname" placeholder="Enter your name" aria-describedby="addressHelp" required>
+              <div *ngIf="name.invalid && showErrors" class="invalid-feedback d-flex">
+                Name is invalid.
+              </div>
+            </div>
+            <small id="addressHelp" class="form-text text-muted">Please enter your name (e.g. John Doe)</small>
+          </div>
+          <div class="form-group">
+            <label for="address">Address</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><fa-icon [icon]="faHome"></fa-icon></span>
+              </div>
+              <input name="address" #address="ngModel" [(ngModel)]="newUser.address" type="text" class="form-control" id="address" aria-describedby="addressHelp" placeholder="Enter your address, city and postal code" required>
+              <div *ngIf="address.invalid && showErrors" class="invalid-feedback d-flex">
+                Address is invalid.
+              </div>
+            </div>
+            <small id="addressHelp" class="form-text text-muted">Please enter your address followed by the postal code and city (e.g. Example street 12, 9560 ACity)</small>
+          </div>
+          <div class="form-group">
+            <label for="phoneNumber">Phone number</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><fa-icon [icon]="faPhone"></fa-icon></span>
+              </div>
+              <input name="phoneNumber" #phoneNumber="ngModel" [(ngModel)]="newUser.phoneNumber" type="text" pattern="[+][0-9].*" class="form-control" id="phoneNumber" aria-describedby="phoneNumberHelp" placeholder="Enter your phone number" required>
+              <div *ngIf="phoneNumber.invalid && showErrors" class="invalid-feedback d-flex">
+                Phone number is invalid.
+              </div>
+            </div>
+            <small id="phoneNumberHelp" class="form-text text-muted">Please enter your phone number with the correct country code (e.g. +4367745367485)</small>
+          </div>
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><fa-icon [icon]="faAt"></fa-icon></span>
+              </div>
+              <input name="email" #email="ngModel" [(ngModel)]="newUser.email" type="email" pattern=".*[@].*[.].+" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" required>
+              <div *ngIf="email.invalid && showErrors" class="invalid-feedback d-flex">
+                Email is invalid
+              </div>
+            </div>
+            <small id="emailHelp" class="form-text text-muted">Please enter your email address (e.g.john@doe.com). We'll never share your email with anyone else.</small>
+          </div>
+          <div class="form-group">
+            <label for="creditcard">Creditcard Number</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><fa-icon [icon]="faCreditCard"></fa-icon></span>
+              </div>
+              <input name="creditcard" #creditcard="ngModel" [(ngModel)]="newUser.creditcard" type="text" pattern="[0-9]+" class="form-control" id="creditcard" aria-describedby="emailHelp" placeholder="Enter cred card number" required>
+              <div *ngIf="creditcard.invalid && showErrors" class="invalid-feedback d-flex">
+                Creditcard number is invalid
+              </div>
+            </div>
+            <small id="emailHelp" class="form-text text-muted">Please enter your creditcard number.</small>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><fa-icon [icon]="faKey"></fa-icon></span>
+              </div>
+              <input name="password" #password="ngModel" (input)="passwordsMatch()" [(ngModel)]="newUser.password" type="password" class="form-control" id="password" placeholder="Password" required>
+              <div *ngIf="password.invalid && showErrors" class="invalid-feedback d-flex">
+                Password is invalid.
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="repeatPassword">Repeat Password</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><fa-icon [icon]="faKey"></fa-icon></span>
+              </div>
+              <input name="repeatPassword" (input)="passwordsMatch()" [(ngModel)]="repeatPassword" type="password" class="form-control" id="repeatPassword" placeholder="Repeat password">
+              <div *ngIf="repeatPasswordInvalid && showErrors" class="invalid-feedback d-flex">
+                Passwords do not match.
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" (click)="createUser(registrationForm)">Create</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
