@@ -1,5 +1,5 @@
 
-<ngb-carousel #carousel [interval]="3000" [pauseOnHover]="pauseOnHover" [pauseOnFocus]="pauseOnFocus" (slide)="onSlide($event)">
+<ngb-carousel #carousel [interval]="3000" (slide)="onSlide($event)">
   <ng-template ngbSlide *ngFor="let img of images; index as i">
     <div class="carousel-caption">
       <h3 style="font-size: 40px;">{{ img.title }}</h3>
@@ -11,18 +11,52 @@
 </ngb-carousel>
 <div class="d-flex justify-content-between flex-column flex-md-row align-items-center p-3 px-md-4 mb-3">
   <div class="container">
+    <div class="row">
+      <h2>Our Bestsellers</h2>
+    </div>
     <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
       <div class="col">
-        <div class="card mb-4 shadow-sm border-0">
-          <div class="card-body">
-            <h1 class="card-title pricing-card-title">$0 <small class="text-muted">/ mo</small></h1>
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>10 users included</li>
-              <li>2 GB of storage</li>
-              <li>Email support</li>
-              <li>Help center access</li>
+        <div class="card rounded shadow-sm border-0">
+          <div class="card-body p-4"><img src="https://res.cloudinary.com/mhmd/image/upload/v1556485076/shoes-1_gthops.jpg" alt="" class="img-fluid d-block mx-auto mb-3">
+            <h5> <a href="#" class="text-dark">Awesome product</a></h5>
+            <p class="small text-muted font-italic">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+            <ul class="list-inline small">
+              <li class="list-inline-item m-0"><fa-icon class="text-success" [icon]="faStar"></fa-icon><i class="fa fa-star text-success"></i></li>
+              <li class="list-inline-item m-0"><fa-icon class="text-success" [icon]="faStar"></fa-icon><i class="fa fa-star text-success"></i></li>
+              <li class="list-inline-item m-0"><fa-icon class="text-success" [icon]="faStar"></fa-icon><i class="fa fa-star text-success"></i></li>
+              <li class="list-inline-item m-0"><fa-icon class="text-success" [icon]="faStar"></fa-icon><i class="fa fa-star text-success"></i></li>
+              <li class="list-inline-item m-0"><fa-icon class="text-success" [icon]="faStar"></fa-icon><i class="fa fa-star text-success"></i></li>
             </ul>
-            <button type="button" class="w-100 btn btn-lg btn-outline-primary">Sign up for free</button>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card rounded shadow-sm border-0">
+          <div class="card-body p-4"><img src="https://res.cloudinary.com/mhmd/image/upload/v1556485077/shoes-3_rk25rt.jpg" alt="" class="img-fluid d-block mx-auto mb-3">
+            <h5> <a href="#" class="text-dark">Awesome product</a></h5>
+            <p class="small text-muted font-italic">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+            <ul class="list-inline small">
+              <li class="list-inline-item m-0"><fa-icon class="text-success" [icon]="faStar"></fa-icon><i class="fa fa-star text-success"></i></li>
+              <li class="list-inline-item m-0"><fa-icon class="text-success" [icon]="faStar"></fa-icon><i class="fa fa-star text-success"></i></li>
+              <li class="list-inline-item m-0"><fa-icon class="text-success" [icon]="faStar"></fa-icon><i class="fa fa-star text-success"></i></li>
+              <li class="list-inline-item m-0"><fa-icon class="text-success" [icon]="faStar"></fa-icon><i class="fa fa-star text-success"></i></li>
+              <li class="list-inline-item m-0"><fa-icon class="text-success" [icon]="faStar"></fa-icon><i class="fa fa-star text-success"></i></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card rounded shadow-sm border-0">
+          <div class="card-body p-4"><img src="https://res.cloudinary.com/mhmd/image/upload/v1556485077/shoes-3_rk25rt.jpg" alt="" class="img-fluid d-block mx-auto mb-3">
+            <h5> <a href="#" class="text-dark">Awesome product</a></h5>
+            <p class="small text-muted font-italic">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+            <ul class="list-inline small">
+              <li class="list-inline-item m-0"><fa-icon class="text-success" [icon]="faStar"></fa-icon><i class="fa fa-star text-success"></i></li>
+              <li class="list-inline-item m-0"><fa-icon class="text-success" [icon]="faStar"></fa-icon><i class="fa fa-star text-success"></i></li>
+              <li class="list-inline-item m-0"><fa-icon class="text-success" [icon]="faStar"></fa-icon><i class="fa fa-star text-success"></i></li>
+              <li class="list-inline-item m-0"><fa-icon class="text-success" [icon]="faStar"></fa-icon><i class="fa fa-star text-success"></i></li>
+              <li class="list-inline-item m-0"><fa-icon class="text-success" [icon]="faStar"></fa-icon><i class="fa fa-star text-success"></i></li>
+            </ul>
           </div>
         </div>
       </div>

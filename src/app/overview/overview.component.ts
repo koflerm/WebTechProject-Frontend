@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NgbCarousel, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-overview',
@@ -14,6 +15,7 @@ export class OverviewComponent {
     { src: 'https://www.itl.cat/pngfile/big/303-3032161_donald-trump-wallpaper-background-kim-jong-un-ok.jpg', title: 'Recommended by celebrities.' }
   ];
 
+  faStar = faStar;
   paused = false;
   unpauseOnArrow = false;
   pauseOnIndicator = false;
@@ -21,7 +23,7 @@ export class OverviewComponent {
   @ViewChild('carousel', { static: true })
   carousel!: NgbCarousel;
 
-  togglePaused() {
+  togglePaused(): void {
     if (this.paused) {
       this.carousel.cycle();
     } else {
@@ -30,7 +32,7 @@ export class OverviewComponent {
     this.paused = !this.paused;
   }
 
-  onSlide(slideEvent: NgbSlideEvent) {
+  onSlide(slideEvent: NgbSlideEvent): void {
     if (this.unpauseOnArrow && slideEvent.paused &&
       (slideEvent.source === NgbSlideEventSource.ARROW_LEFT || slideEvent.source === NgbSlideEventSource.ARROW_RIGHT)) {
       this.togglePaused();

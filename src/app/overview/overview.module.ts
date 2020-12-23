@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { OverviewRoutingModule } from './overview-routing.module';
 import { OverviewComponent } from './overview.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   imports: [
     CommonModule,
     OverviewRoutingModule,
-    NgbModule
+    NgbModule,
+    FontAwesomeModule
   ]
 })
 export class OverviewModule { }
