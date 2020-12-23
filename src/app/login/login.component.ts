@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { faAt, faKey } from '@fortawesome/free-solid-svg-icons';
+import { UserService } from '../core/services/user.service';
 import { User } from '../models/user';
 
 @Component({
@@ -14,7 +15,7 @@ export class LoginComponent {
   showErrors: boolean;
   user: User;
 
-  constructor() { 
+  constructor(private userService: UserService) { 
     this.showErrors = false;
     this.user = { name: "", address: "", phoneNumber: "", email: "", creditcard: "", password: ""}
   }
@@ -23,7 +24,9 @@ export class LoginComponent {
     if (loginForm.invalid) {
       this.showErrors = true;
     } else {
-      console.log("success!");
+      this.userService.loginUser(this.user.email, this.user.password).subscribe((user) => {
+        console.log(user);
+      });
     }
   }
 

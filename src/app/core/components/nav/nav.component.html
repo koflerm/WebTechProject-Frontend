@@ -4,8 +4,13 @@
     <a class="p-2 text-dark" [routerLink]="'products'">Products</a>
   </nav>
   <p class="h5 my-0 me-md-auto fw-normal">NotMyWallet</p>
-  <div>
+  <div *ngIf="!user; else userLoggedIn">
     <a class="btn btn-outline-primary" [routerLink]="'login'">Login</a>
     <a class="btn btn-outline-primary spaced" [routerLink]="'register'">Sign up</a>
   </div>
+  <ng-template #userLoggedIn>
+    <div *ngIf="user">
+      <a class="btn btn-outline-primary" (click)="logoutUser()">Logout</a>
+    </div>
+  </ng-template>
 </header>
