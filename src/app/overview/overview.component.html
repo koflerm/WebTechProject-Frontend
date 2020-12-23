@@ -17,14 +17,13 @@
           <div class="card-body p-4"><img src="https://res.cloudinary.com/mhmd/image/upload/v1556485076/shoes-1_gthops.jpg" alt="" class="img-fluid d-block mx-auto mb-3">
             <h5> <a [routerLink]="'/products/' + product.id" class="text-dark">{{product.name}}</a></h5>
             <p class="small text-muted font-italic">{{product.description}}</p>
-            <p class="small text-muted font-italic">{{product.price}},- Euro</p>
-            <ul class="list-inline small">
-              <li class="list-inline-item m-0"><fa-icon class="text-success" [icon]="faStar"></fa-icon><i class="fa fa-star text-success"></i></li>
-              <li class="list-inline-item m-0"><fa-icon class="text-success" [icon]="faStar"></fa-icon><i class="fa fa-star text-success"></i></li>
-              <li class="list-inline-item m-0"><fa-icon class="text-success" [icon]="faStar"></fa-icon><i class="fa fa-star text-success"></i></li>
-              <li class="list-inline-item m-0"><fa-icon class="text-success" [icon]="faStar"></fa-icon><i class="fa fa-star text-success"></i></li>
-              <li class="list-inline-item m-0"><fa-icon class="text-success" [icon]="faStar"></fa-icon><i class="fa fa-star text-success"></i></li>
-            </ul>
+            <h6 class="text-success">{{product.price}},- Euro</h6>
+            <ng-container *ngIf="getAverageRating(product) | async as averageRating; else noRating">
+              <app-rating [rating]="averageRating"></app-rating>
+            </ng-container>
+            <ng-template #noRating>
+              <app-rating [rating]="0"></app-rating>
+            </ng-template>
           </div>
         </div>
       </div>

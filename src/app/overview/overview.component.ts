@@ -3,6 +3,9 @@ import { NgbCarousel, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/n
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { ProductService } from '../core/services/product.service';
 import { Product } from '../models/product';
+import { RatingService } from '../core/services/rating.service';
+import { Rating } from '../models/rating';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-overview',
@@ -20,7 +23,7 @@ export class OverviewComponent {
   @ViewChild('carousel', { static: true })
   carousel!: NgbCarousel;
 
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService, private ratingService: RatingService) {
     this.images = [
       { src: 'assets/img/handshake.jpg', title: 'Trusted by 1.000.000+ customers' },
       { src: 'https://wallpapercrafter.com/desktop/292420-dog-friendship-nature-trust-labrador-snout.jpg', title: 'We like dogs.' },
@@ -56,7 +59,16 @@ export class OverviewComponent {
       this.products = products;
     })
   }
-
   
+  calculateRatingStars(rating: number): Array<number> {
+    return Array(Math.round(rating)).fill(4);
+  }
 
+  calculateGreyStars(rating: number): Array<number> {
+    return Array(5 - Math.round(rating)).fill(4);
+  }
+
+  getAverageRating(product: Product): Observable<number> {
+    return this.ratingService.getAverageRatingForProduct(product)
+  }
 }

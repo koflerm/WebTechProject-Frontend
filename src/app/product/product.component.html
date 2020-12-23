@@ -8,6 +8,12 @@
                 <div class="col">
                     <h4>{{ product!.name }}</h4>
                     <hr>
+                    <ng-container *ngIf="averageRating; else noRating">
+                        <app-rating [rating]="averageRating"></app-rating>
+                    </ng-container>
+                    <ng-template #noRating>
+                        <app-rating [rating]="0"></app-rating>
+                    </ng-template>
                     <h6 class="text-success">{{ product!.price }},- EURO</h6>
                     <p>{{ product!.description }}</p>
                     <button class="btn btn-primary">Add to basket</button>
@@ -19,17 +25,21 @@
                     <hr>
                 </div>
             </div>
-            <div class="row row-cols-1 row-cols-md-2">
-                <div class="col">
-                        <ul class="list-inline small">
-                        <li class="list-inline-item m-0"><fa-icon class="text-success" [icon]="faStar"></fa-icon><i class="fa fa-star text-success"></i></li>
-                        <li class="list-inline-item m-0"><fa-icon class="text-success" [icon]="faStar"></fa-icon><i class="fa fa-star text-success"></i></li>
-                        <li class="list-inline-item m-0"><fa-icon class="text-success" [icon]="faStar"></fa-icon><i class="fa fa-star text-success"></i></li>
-                        <li class="list-inline-item m-0"><fa-icon class="text-success" [icon]="faStar"></fa-icon><i class="fa fa-star text-success"></i></li>
-                        <li class="list-inline-item m-0"><fa-icon class="text-success" [icon]="faStar"></fa-icon><i class="fa fa-star text-success"></i></li>
-                    </ul>
-                    <p>Nice shoe</p>
-                </div>
+            <div class="row row-cols-1">
+                <ng-container *ngIf="ratings.length > 0; else noRatings">
+                    <div *ngFor="let rating of ratings" class="col">
+                        <div class="d-flex">
+                            <app-rating [rating]="rating.value"></app-rating>
+                            <span> ~ by {{rating.user.name}}</span>
+                        </div>
+                        <hr>
+                    </div>
+                </ng-container>
+                <ng-template #noRatings>
+                    <div class="col">
+                        <p>no ratings</p>
+                    </div>
+                </ng-template>
             </div>
         </div>
     </div>

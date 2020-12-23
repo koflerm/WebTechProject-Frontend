@@ -1,0 +1,4 @@
+<ul class="list-inline small">
+    <li *ngFor='let ratingStar of calculateRatingStars()' class="list-inline-item m-0"><fa-icon class="text-success" [icon]="faStar"></fa-icon></li>
+    <li *ngFor='let greyStar of calculateGreyStars()' class="list-inline-item m-0"><fa-icon [icon]="faStar"></fa-icon></li>
+</ul>
