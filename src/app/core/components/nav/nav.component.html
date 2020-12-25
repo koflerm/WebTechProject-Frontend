@@ -10,7 +10,11 @@
   </div>
   <ng-template #userLoggedIn>
     <div *ngIf="user">
-      <a class="btn btn-outline-primary" (click)="logoutUser()">Logout</a>
+      <a [routerLink]="'cart'">
+        <fa-icon [icon]="faShoppingCart"></fa-icon>
+        <span *ngIf="shoppingCart" class='badge badge-warning' id='lblCartCount'>{{ shoppingCart.length }}</span>
+      </a>
+      <a class="ml-3 btn btn-outline-primary" (click)="logoutUser()">Logout</a>
     </div>
   </ng-template>
 </header>
