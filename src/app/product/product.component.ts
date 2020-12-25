@@ -4,6 +4,8 @@ import { ProductService } from '../core/services/product.service';
 import { Product } from '../models/product';
 import { RatingService } from '../core/services/rating.service';
 import { Rating } from '../models/rating';
+import { User } from '../models/user';
+import { UserService } from '../core/services/user.service';
 
 @Component({
   selector: 'app-product',
@@ -14,15 +16,18 @@ export class ProductComponent implements OnInit {
   product: Product|undefined;
   ratings: Array<Rating>;
   productId: string;
-  averageRating: number|undefined;
+  averageRating: number;
+  user: User|undefined;
 
   constructor(
     private productService: ProductService, 
     private route: ActivatedRoute,
-    private ratingService: RatingService
+    private ratingService: RatingService,
+    private userService: UserService
   ) { 
     this.productId = this.route.snapshot.paramMap.get('pid')!;
     this.ratings = [];
+    this.averageRating = 0;
   }
 
   ngOnInit() {
@@ -35,5 +40,16 @@ export class ProductComponent implements OnInit {
         this.ratings = ratings;
       });
     })
+    this.userService.userNotifier().subscribe((user) => {
+      this.user = user;
+    })
+  }
+
+  addRating(rating: Rating) {
+    console.log(rating);
+    this.ratings.push(rating);
+    this.ratingService.getAverageRatingForProduct(this.product!).subscribe((rating) => {
+      this.averageRating = rating;
+    });
   }
 }

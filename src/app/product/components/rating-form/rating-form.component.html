@@ -1,0 +1,25 @@
+<div class="row">
+    <div class="col">
+        <h5>Rate this product</h5>
+        <hr>
+    </div>
+</div>
+<div *ngIf="!rated; else thankMessage" class="row row-cols-1">
+    <div class="col">
+        <ngb-rating [(rate)]="rating!.value" [max]="5">
+            <ng-template let-fill="fill" let-index="index">
+                <li class="list-inline-item m-0"><fa-icon [class.text-success]="fill === 100" [icon]="faStar"></fa-icon></li>
+            </ng-template>
+        </ngb-rating>
+    </div>
+    <div class="col mt-3 mb-3">
+        <button class="btn btn-secondary" (click)="createRating()">Submit rating</button>
+    </div>
+</div>
+<ng-template #thankMessage>
+    <div class="row row-cols-1">
+        <div class="col">
+            <p class="text-success">Thanks for rating this product!</p>
+        </div>
+    </div>
+</ng-template>

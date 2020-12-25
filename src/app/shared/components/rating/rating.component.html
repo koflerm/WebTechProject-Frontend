@@ -1,4 +1,9 @@
-<ul class="list-inline small">
+<!-- <ul class="list-inline small">
     <li *ngFor='let ratingStar of calculateRatingStars()' class="list-inline-item m-0"><fa-icon class="text-success" [icon]="faStar"></fa-icon></li>
     <li *ngFor='let greyStar of calculateGreyStars()' class="list-inline-item m-0"><fa-icon [icon]="faStar"></fa-icon></li>
-</ul>
+</ul> -->
+<ngb-rating [rate]="rating" [max]="5" [readonly]="true">
+    <ng-template let-fill="fill" let-index="index">
+        <li class="list-inline-item m-0"><fa-icon [class.text-success]="fill === 100" [icon]="faStar"></fa-icon></li>
+    </ng-template>
+</ngb-rating>

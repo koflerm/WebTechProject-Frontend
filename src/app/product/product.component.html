@@ -8,17 +8,18 @@
                 <div class="col">
                     <h4>{{ product!.name }}</h4>
                     <hr>
-                    <ng-container *ngIf="averageRating; else noRating">
-                        <app-rating [rating]="averageRating"></app-rating>
-                    </ng-container>
-                    <ng-template #noRating>
-                        <app-rating [rating]="0"></app-rating>
-                    </ng-template>
+                    <app-rating [rating]="averageRating"></app-rating>
                     <h6 class="text-success">{{ product!.price }},- EURO</h6>
                     <p>{{ product!.description }}</p>
-                    <button class="btn btn-primary">Add to basket</button>
+                    <button *ngIf="user; else loginRequired" class="btn btn-primary">Add to basket</button>
+                    <ng-template #loginRequired>
+                        <button class="btn btn-primary" [disabled]="true">Add to basket (login/registration required)</button>
+                    </ng-template>
                 </div>
             </div>
+            <ng-container *ngIf="user && product">
+                <app-rating-form [user]="user" [product]="product" (onCreateRating)="addRating($event)"></app-rating-form>
+            </ng-container>
             <div class="row">
                 <div class="col">
                     <h5>Ratings</h5>

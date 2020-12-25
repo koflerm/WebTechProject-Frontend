@@ -44,4 +44,12 @@ export class RatingService {
       subscribers.complete();
     });
   }
+
+  public createRatingForProduct(rating: Rating): Observable<boolean> {
+    return new Observable<boolean>((subscribers) => {
+      this.ratings.push(rating);
+      subscribers.next(true);
+      subscribers.complete();
+    });
+  }
 }

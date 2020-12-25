@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RatingComponent } from './components/rating/rating.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -9,7 +10,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   declarations: [RatingComponent],
   imports: [
     CommonModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    NgbModule
   ],
   exports: [RatingComponent]
 })
