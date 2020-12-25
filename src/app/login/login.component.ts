@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { faAt, faKey } from '@fortawesome/free-solid-svg-icons';
+import { ModalService } from '../core/services/modal.service';
 import { UserService } from '../core/services/user.service';
 import { User } from '../models/user';
 
@@ -15,7 +17,10 @@ export class LoginComponent {
   showErrors: boolean;
   user: User;
 
-  constructor(private userService: UserService) { 
+  constructor(
+    private userService: UserService,
+    private modalService: ModalService
+  ) { 
     this.showErrors = false;
     this.user = { name: "", address: "", phoneNumber: "", email: "", creditcard: "", password: ""}
   }
@@ -24,8 +29,8 @@ export class LoginComponent {
     if (loginForm.invalid) {
       this.showErrors = true;
     } else {
-      this.userService.loginUser(this.user.email, this.user.password).subscribe((user) => {
-        console.log(user);
+      this.userService.loginUser(this.user.email, this.user.password).subscribe((user: User) => {
+        this.modalService.openModal(`Welcome back ${user.name}!`, 'overview');
       });
     }
   }

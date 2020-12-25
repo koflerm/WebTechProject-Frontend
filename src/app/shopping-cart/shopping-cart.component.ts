@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { textChangeRangeIsUnchanged } from 'typescript';
+import { ModalService } from '../core/services/modal.service';
 import { ShoppingCartService } from '../core/services/shopping-cart.service';
 import { Order } from '../models/order';
 import { Product } from '../models/product';
-import { InformationModalComponent } from '../shared/components/information-modal/information-modal.component';
 import { OrderConfirmationComponent } from './components/order-confirmation/order-confirmation.component';
 
 @Component({
@@ -19,8 +17,8 @@ export class ShoppingCartComponent implements OnInit {
 
   constructor(
     private shoppingCartService: ShoppingCartService,
-    private modalService: NgbModal,
-    private router: Router,
+    private ngbModalService: NgbModal,
+    private modalService: ModalService
   ) { 
     this.totalPrice = 0;
   }
@@ -45,12 +43,10 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   openOrderModal(): void {
-    const ref = this.modalService.open(OrderConfirmationComponent);
+    const ref = this.ngbModalService.open(OrderConfirmationComponent);
     ref.componentInstance.shoppingCart = this.shoppingCart;
     ref.result.then((order: Order) => {
-      const informationRef = this.modalService.open(InformationModalComponent);
-      informationRef.componentInstance.message = "Order created successfully";
-      this.router.navigate(['overview']);
+      this.modalService.openModal('Order created successfully', 'overview');
     })
   }
 }

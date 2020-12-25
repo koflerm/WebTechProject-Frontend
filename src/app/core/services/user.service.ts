@@ -38,14 +38,14 @@ export class UserService {
     }
   }
 
-  public loginUser(email: string, password: string): Observable<boolean> {
+  public loginUser(email: string, password: string): Observable<User> {
     // Temporary code. will be replaced by login call to backend
     return new Observable((subscribers) => {
       let foundUser: boolean = false;
       for (let user of this.users) {
         if (user.email == email && user.password == password) {
           this._updateUser(user, user.email);
-          subscribers.next(true);
+          subscribers.next(user);
           subscribers.complete();
           foundUser = true;
         }

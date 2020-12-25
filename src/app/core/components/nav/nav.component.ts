@@ -5,6 +5,7 @@ import { UserService } from '../../services/user.service';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
 import { Product } from 'src/app/models/product';
+import { ModalService } from '../../services/modal.service';
 
 @Component({
   selector: 'app-nav',
@@ -19,7 +20,8 @@ export class NavComponent implements OnInit {
   constructor(
     private userService: UserService,
     private router: Router,
-    private shoppingCartService: ShoppingCartService
+    private shoppingCartService: ShoppingCartService,
+    private modalService: ModalService
   ) { 
     
   }
@@ -36,5 +38,6 @@ export class NavComponent implements OnInit {
 
   logoutUser(): void {
     this.userService.logoutUser();
+    this.modalService.openModal(`Logged out successfully.`, 'overview');
   }
 }

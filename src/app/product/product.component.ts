@@ -7,8 +7,7 @@ import { Rating } from '../models/rating';
 import { User } from '../models/user';
 import { UserService } from '../core/services/user.service';
 import { ShoppingCartService } from '../core/services/shopping-cart.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { InformationModalComponent } from '../shared/components/information-modal/information-modal.component';
+import { ModalService } from '../core/services/modal.service';
 
 @Component({
   selector: 'app-product',
@@ -28,8 +27,7 @@ export class ProductComponent implements OnInit {
     private ratingService: RatingService,
     private userService: UserService,
     private shoppingCardService: ShoppingCartService,
-    private modalService: NgbModal,
-    private router: Router
+    private modalService: ModalService,
   ) { 
     this.productId = this.route.snapshot.paramMap.get('pid')!;
     this.ratings = [];
@@ -61,8 +59,6 @@ export class ProductComponent implements OnInit {
 
   addToShoppingCard(product: Product) {
     this.shoppingCardService.addProductToShoppingCard(product);
-    let ref = this.modalService.open(InformationModalComponent);
-    ref.componentInstance.message = `${product.name} has been added to the shopping card.`
-    this.router.navigate(['overview']);
+    this.modalService.openModal(`${product.name} successfully added to shopping cart.`, 'overview');
   }
 }

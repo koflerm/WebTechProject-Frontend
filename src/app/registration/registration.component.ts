@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { faUser, faHome, faPhone, faAt, faKey, faCreditCard } from '@fortawesome/free-solid-svg-icons';
+import { ModalService } from '../core/services/modal.service';
+import { UserService } from '../core/services/user.service';
 import { User } from '../models/user';
 
 @Component({
@@ -20,7 +22,10 @@ export class RegistrationComponent implements OnInit {
   repeatPassword: string;
   repeatPasswordInvalid: boolean;
 
-  constructor() { 
+  constructor(
+    private modalService: ModalService,
+    private userService: UserService
+  ) { 
     this.newUser = { name: "", address: "", phoneNumber: "", email: "", creditcard: "", password: ""}
     this.showErrors = false;
     this.repeatPasswordInvalid = false;
@@ -34,7 +39,9 @@ export class RegistrationComponent implements OnInit {
     if (form.invalid || this.repeatPasswordInvalid) {
       this.showErrors = true;
     } else {
-      console.log("success!");
+      this.userService.registerUser(this.newUser).subscribe((user: User) => {
+        this.modalService.openModal(`Welcome to Trustmart ${user.name}!`, 'overview');
+      })
     }
   }
 
