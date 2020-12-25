@@ -7,16 +7,11 @@ import { Product } from 'src/app/models/product';
 })
 export class ShoppingCartService {
   private _shoppingCart: BehaviorSubject<Product[] | undefined>;
-
-  shoppingCart: Array<Product> = [
-    {id: "1", name: "Adidas Fast 2", description: "A nice shoe from the brand adidas", price: 0},
-    {id: "2", name: "Nike Pro 1", description: "A nice shoe from the brand Nike", price: 0},
-  ]
+  private shoppingCart: Array<Product>;
 
   constructor() { 
     this._shoppingCart = new BehaviorSubject<Product[] | undefined>(undefined);
-    // temporary code for testing. Remove this afterwards
-    sessionStorage.setItem('shoppingCart', JSON.stringify(this.shoppingCart));
+    this.shoppingCart = [];
     this._getShoppingCartFromSession();
   }
 
@@ -25,6 +20,7 @@ export class ShoppingCartService {
       try {
         const shoppingCart = JSON.parse(sessionStorage.getItem('shoppingCart')!);
         this._shoppingCart.next(shoppingCart);
+        this.shoppingCart = shoppingCart;
       } catch (e) {
         sessionStorage.removeItem('shoppingCart');
       }
@@ -54,6 +50,12 @@ export class ShoppingCartService {
   }
 
   private _sendShoppingCardUpdate(): void {
+    sessionStorage.setItem('shoppingCart', JSON.stringify(this.shoppingCart));
     this._shoppingCart.next(this.shoppingCart);
+  }
+
+  public clearShoppingCart(): void {
+    this.shoppingCart = [];
+    this._sendShoppingCardUpdate();
   }
 }
