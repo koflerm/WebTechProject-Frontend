@@ -6,6 +6,7 @@ import { RatingService } from '../core/services/rating.service';
 import { Rating } from '../models/rating';
 import { User } from '../models/user';
 import { UserService } from '../core/services/user.service';
+import { ShoppingCartService } from '../core/services/shopping-cart.service';
 
 @Component({
   selector: 'app-product',
@@ -23,7 +24,8 @@ export class ProductComponent implements OnInit {
     private productService: ProductService, 
     private route: ActivatedRoute,
     private ratingService: RatingService,
-    private userService: UserService
+    private userService: UserService,
+    private shoppingCardService: ShoppingCartService
   ) { 
     this.productId = this.route.snapshot.paramMap.get('pid')!;
     this.ratings = [];
@@ -51,5 +53,9 @@ export class ProductComponent implements OnInit {
     this.ratingService.getAverageRatingForProduct(this.product!).subscribe((rating) => {
       this.averageRating = rating;
     });
+  }
+
+  addToShoppingCard(product: Product) {
+    this.shoppingCardService.addProductToShoppingCard(product);
   }
 }

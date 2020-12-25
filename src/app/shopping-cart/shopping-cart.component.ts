@@ -31,4 +31,7 @@ export class ShoppingCartComponent implements OnInit {
     }
   }
 
+  removeFromShoppingCard(product: Product) {
+    this.shoppingCart = this.shoppingCartService.removeProductFromShoppingCard(product);
+  }
 }

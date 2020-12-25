@@ -11,7 +11,7 @@
                     <app-rating [rating]="averageRating"></app-rating>
                     <h6 class="text-success">{{ product!.price }},- EURO</h6>
                     <p>{{ product!.description }}</p>
-                    <button *ngIf="user; else loginRequired" class="btn btn-primary">Add to basket</button>
+                    <button *ngIf="user; else loginRequired" class="btn btn-primary" (click)="addToShoppingCard(product!)">Add to basket</button>
                     <ng-template #loginRequired>
                         <button class="btn btn-primary" [disabled]="true">Add to basket (login/registration required)</button>
                     </ng-template>

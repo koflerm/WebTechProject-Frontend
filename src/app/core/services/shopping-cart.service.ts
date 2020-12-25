@@ -34,4 +34,26 @@ export class ShoppingCartService {
   public shoppingCartNotifier(): Observable<Product[] | undefined> {
     return this._shoppingCart.asObservable();
   }
+
+  public addProductToShoppingCard(product: Product): Product[] {
+    this.shoppingCart.push(product);
+    this._sendShoppingCardUpdate();
+    return this.shoppingCart;
+  }
+
+  public removeProductFromShoppingCard(product: Product): Product[] {
+    for (let currentProduct of this.shoppingCart) {
+      if (currentProduct.id == product.id) {
+        let index = this.shoppingCart.indexOf(currentProduct);
+        this.shoppingCart.splice(index, 1);
+        this._sendShoppingCardUpdate();
+        break;
+      }
+    }
+    return this.shoppingCart;
+  }
+
+  private _sendShoppingCardUpdate(): void {
+    this._shoppingCart.next(this.shoppingCart);
+  }
 }
