@@ -1,9 +1,9 @@
-<header class="d-flex justify-content-between flex-column flex-md-row align-items-center p-3 px-md-4 mb- bg-white border-bottom shadow-sm">
+<header class="d-flex justify-content-between flex-column flex-md-row align-items-center p-3 px-md-4 bg-white border-bottom shadow-sm">
   <nav class="my-2 my-md-0 me-md-3">
     <a class="p-2 text-dark" [routerLink]="'overview'">Overview</a>
     <a class="p-2 text-dark" [routerLink]="'products'">Products</a>
   </nav>
-  <p class="h5 my-0 me-md-auto fw-normal">Trustmart</p>
+  <p class="h5 my-0 me-md-auto fw-normal p-3 p-md-0">Trustmart</p>
   <div *ngIf="!user; else userLoggedIn">
     <a class="btn btn-outline-primary" [routerLink]="'login'">Login</a>
     <a class="btn btn-outline-primary ml-2" [routerLink]="'register'">Sign up</a>

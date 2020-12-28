@@ -8,10 +8,10 @@ import { Product } from 'src/app/models/product';
 })
 export class ProductService {
   products: Array<Product> = [
-    {id: "1", name: "Adidas Fast 2", description: "A nice shoe from the brand adidas", price: 0},
-    {id: "2", name: "Nike Pro 1", description: "A nice shoe from the brand Nike", price: 0},
-    {id: "3", name: "Voeslauer", description: "A nice mineral water from the brand Voeslauer", price: 0},
-    {id: "4", name: "Tiroler Quelle", description: "A nice mineral water from the brand Tiroler Quelle", price: 0},
+    {id: "1", name: "Adidas Fast 2", description: "A nice shoe from the brand adidas", price: 0, category: new Category("Shoes")},
+    {id: "2", name: "Nike Pro 1", description: "A nice shoe from the brand Nike", price: 0, category: new Category("Shoes")},
+    {id: "3", name: "Voeslauer", description: "A nice mineral water from the brand Voeslauer", price: 0, category: new Category("Water")},
+    {id: "4", name: "Tiroler Quelle", description: "A nice mineral water from the brand Tiroler Quelle", price: 0, category: new Category("Water")},
   ];
 
   constructor() { }
@@ -50,11 +50,30 @@ export class ProductService {
     return new Observable<Array<Product>>((subscribers) => {
       let categoryProducts: Array<Product> = [];
       for (let product of this.products) {
-        if (product.category == category) {
+        if (product.category!.name == category.name) {
           categoryProducts.push(product);
         }
       }
-      subscribers.next(this.products);
+      subscribers.next(categoryProducts);
+      subscribers.complete;
+    });
+  }
+
+  public getProductsForName(name: string, category?: Category): Observable<Array<Product>> {
+    return new Observable<Array<Product>>((subscribers) => {
+      let sortedProducts: Array<Product> = [];
+      for (let product of this.products) {
+        if (product.name.toLowerCase().includes(name.toLowerCase())) {
+          if (category) {
+            if (product.category!.name == category.name) {
+              sortedProducts.push(product);
+            }
+          } else {
+            sortedProducts.push(product);
+          }
+        }
+      }
+      subscribers.next(sortedProducts);
       subscribers.complete;
     });
   }

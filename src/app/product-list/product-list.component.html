@@ -1,63 +1,23 @@
-<div class="container mt-3">
-  <div class="row">
-    <div class="col-3">
-      <app-sidebar></app-sidebar>
-    </div>
-    <div class="col-9">
-      <div class="row">
-        <div class="col-4">
-          <div class="rounded shadow-sm border-0 product bg-white">
-            <div class="card-body">
-              <h1 class="card-title pricing-card-title">$0 <small class="text-muted">/ mo</small></h1>
-              <ul class="list-unstyled mt-3 mb-4">
-                <li>10 users included</li>
-                <li>2 GB of storage</li>
-                <li>Email support</li>
-                <li>Help center access</li>
-              </ul>
-              <button type="button" class="w-100 btn btn-lg btn-outline-primary">Sign up for free</button>
-            </div>
-          </div>
-        </div>
-        <div class="col-4">
-          <div class="rounded shadow-sm border-0 product bg-white">
-            <div class="card-body">
-              <h1 class="card-title pricing-card-title">$0 <small class="text-muted">/ mo</small></h1>
-              <ul class="list-unstyled mt-3 mb-4">
-                <li>10 users included</li>
-                <li>2 GB of storage</li>
-                <li>Email support</li>
-                <li>Help center access</li>
-              </ul>
-              <button type="button" class="w-100 btn btn-lg btn-outline-primary">Sign up for free</button>
-            </div>
-          </div>
-        </div>
-        <div class="col-4">
-          <div class="rounded shadow-sm border-0 product bg-white">
-            <div class="card-body">
-              <h1 class="card-title pricing-card-title">$0 <small class="text-muted">/ mo</small></h1>
-              <ul class="list-unstyled mt-3 mb-4">
-                <li>10 users included</li>
-                <li>2 GB of storage</li>
-                <li>Email support</li>
-                <li>Help center access</li>
-              </ul>
-              <button type="button" class="w-100 btn btn-lg btn-outline-primary">Sign up for free</button>
-            </div>
-          </div>
-        </div>
-        <div class="col-4">
-          <div class="rounded shadow-sm border-0 product bg-white">
-            <div class="card-body">
-              <h1 class="card-title pricing-card-title">$0 <small class="text-muted">/ mo</small></h1>
-              <ul class="list-unstyled mt-3 mb-4">
-                <li>10 users included</li>
-                <li>2 GB of storage</li>
-                <li>Email support</li>
-                <li>Help center access</li>
-              </ul>
-              <button type="button" class="w-100 btn btn-lg btn-outline-primary">Sign up for free</button>
+
+<div class="d-flex flex-md-row flex-column h-100">
+  <div class="d-flex flex-grow-1 flex-md-grow-0">
+    <app-sidebar class="d-flex flex-grow-1 flex-md-grow-0 flex-column" (onCategorySelect)="filterProducts($event)" (onSearchInput)="filterProductsByName($event)"></app-sidebar>
+  </div>
+  <div class="container">
+    <div class="justify-content-between align-items-center p-3 px-md-4 mb-3">
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 mb-3 text-center">
+        <div *ngFor="let product of products" class="d-flex col mb-3">
+          <div class="card rounded shadow-sm border-0 flex-grow-1">
+            <div class="card-body p-4"><img src="https://res.cloudinary.com/mhmd/image/upload/v1556485076/shoes-1_gthops.jpg" alt="" class="img-fluid d-block mx-auto mb-3">
+              <h5> <a [routerLink]="'/products/' + product.id" class="text-dark">{{product.name}}</a></h5>
+              <p class="small text-muted font-italic">{{product.description}}</p>
+              <h6 class="text-success">{{product.price}},- Euro</h6>
+              <ng-container *ngIf="getAverageRating(product) | async as averageRating; else noRating">
+                <app-rating [rating]="averageRating"></app-rating>
+              </ng-container>
+              <ng-template #noRating>
+                <app-rating [rating]="0"></app-rating>
+              </ng-template>
             </div>
           </div>
         </div>
@@ -65,3 +25,5 @@
     </div>
   </div>
 </div>
+
+
