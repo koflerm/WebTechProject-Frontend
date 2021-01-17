@@ -14,7 +14,10 @@
     <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
       <div *ngFor="let product of products" class="d-flex col mb-3">
         <div class="card rounded shadow-sm border-0 flex-grow-1">
-          <div class="card-body p-4"><img src="{{ product.image }}" alt="" class="img-fluid d-block mx-auto mb-3">
+          <div class="card-body p-4 d-flex flex-column">
+            <div class="align-items-center flex-grow-1 d-flex">
+              <img src="{{ product.image }}" alt="" class="img-fluid d-block mx-auto mb-3">
+            </div>
             <h5> <a [routerLink]="'/products/' + product.id" class="text-dark">{{product.name}}</a></h5>
             <p class="small text-muted font-italic">{{product.description}}</p>
             <h6 class="text-success">{{product.price / 100}},- Euro</h6>
