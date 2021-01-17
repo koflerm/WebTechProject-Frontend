@@ -3,13 +3,13 @@
         <div class="card-body">
             <div class="row row-cols-1 row-cols-md-2">
                 <div class="col">
-                    <img src="https://res.cloudinary.com/mhmd/image/upload/v1556485076/shoes-1_gthops.jpg" alt="" class="img-fluid d-block mx-auto mb-3">
+                    <img src="{{ product.image }}" alt="" class="img-fluid d-block mx-auto mb-3">
                 </div>
                 <div class="col">
                     <h4>{{ product!.name }}</h4>
                     <hr>
                     <app-rating [rating]="product.average_rating"></app-rating>
-                    <h6 class="text-success">{{ product!.price }},- EURO</h6>
+                    <h6 class="text-success">{{ product!.price / 100 }},- EURO</h6>
                     <p>{{ product!.description }}</p>
                     <button *ngIf="user; else loginRequired" class="btn btn-primary" (click)="addToShoppingCard(product!)">Add to basket</button>
                     <ng-template #loginRequired>

@@ -12,12 +12,14 @@ export class SidebarComponent implements OnInit {
   @Output() onFilterUpdate: EventEmitter<object|undefined>;
   currentName: string|undefined;
   currentCategory: string|undefined;
-  currentMinPrice: number|undefined;
-  currentMaxPrice: number|undefined;
+  currentMinPrice: number;
+  currentMaxPrice: number;
   currentDescription: string|undefined;
 
   constructor(private categoryService: CategoryService) { 
     this.onFilterUpdate = new EventEmitter();
+    this.currentMinPrice = 1;
+    this.currentMaxPrice = 100000
   }
 
   ngOnInit(): void {
