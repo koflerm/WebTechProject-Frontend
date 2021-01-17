@@ -13,7 +13,6 @@ import { Product } from '../models/product';
 })
 export class ProductListComponent implements OnInit {
   products: Product[]|undefined;
-  currentCategory: Category|undefined;
 
   constructor(
     private productService: ProductService,
@@ -30,32 +29,9 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  getAverageRating(product: Product): Observable<number> {
-    return this.ratingService.getAverageRatingForProduct(product);
+  filterProducts(parameters: object): void {
+    this.productService.getFilteredProducts(parameters).subscribe((products) => {
+      this.products = products;
+    });
   }
-
-  filterProducts(category: Category|undefined): void {
-    if (!category) {
-      this.currentCategory = undefined;
-      this._getAllProducts();
-    } else {
-      this.currentCategory = category;
-      this.productService.getProductsForCategory(category!).subscribe((products) => {
-        this.products = products;
-      });
-    }
-  }
-
-  filterProductsByName(name: string): void {
-    if (this.currentCategory) {
-      this.productService.getProductsForName(name, this.currentCategory).subscribe((products) => {
-        this.products = products;
-      });
-    } else {
-      this.productService.getProductsForName(name).subscribe((products) => {
-        this.products = products;
-      });
-    }
-  }
-
 }

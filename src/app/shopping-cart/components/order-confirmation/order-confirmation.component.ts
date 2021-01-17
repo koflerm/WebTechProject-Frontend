@@ -30,11 +30,17 @@ export class OrderConfirmationComponent implements OnInit {
   }
 
   orderProducts(): void {
-    this.orderService.createOrder(this.shoppingCart, this.user!).subscribe((order: Order) => {
-      this.shoppingCardService.clearShoppingCart();
-      this.modal.close(order);
-    });
-
+    let openProducts = this.shoppingCart;
+    for (let product of this.shoppingCart) {
+      this.orderService.createOrder(product, this.user!).subscribe((order: Order) => {
+        let index = openProducts.indexOf(product);
+        openProducts.splice(index, 1);
+        if (openProducts.length == 0) {
+          this.shoppingCardService.clearShoppingCart();
+          this.modal.close(order);
+        }
+      });
+    }
   }
 
 }

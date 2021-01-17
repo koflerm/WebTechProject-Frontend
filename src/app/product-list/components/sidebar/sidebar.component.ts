@@ -9,14 +9,15 @@ import { Category } from 'src/app/models/category';
 })
 export class SidebarComponent implements OnInit {
   categories: Category[]|undefined;
-  @Output() onCategorySelect: EventEmitter<Category|undefined>;
-  @Output() onSearchInput: EventEmitter<string>;
-  searchText: string;
+  @Output() onFilterUpdate: EventEmitter<object|undefined>;
+  currentName: string|undefined;
+  currentCategory: string|undefined;
+  currentMinPrice: number|undefined;
+  currentMaxPrice: number|undefined;
+  currentDescription: string|undefined;
 
   constructor(private categoryService: CategoryService) { 
-    this.onCategorySelect = new EventEmitter();
-    this.onSearchInput = new EventEmitter();
-    this.searchText = '';
+    this.onFilterUpdate = new EventEmitter();
   }
 
   ngOnInit(): void {
@@ -25,11 +26,7 @@ export class SidebarComponent implements OnInit {
     })
   }
 
-  filterForCategory(category: Category|undefined): void {
-    this.onCategorySelect.emit(category);
-  }
-
-  searchForName(): void {
-    this.onSearchInput.emit(this.searchText);
+  updateFilter(): void {
+    this.onFilterUpdate.emit({name: this.currentName, price_min: this.currentMinPrice, price_max: this.currentMaxPrice, description: this.currentDescription, category: this.currentCategory});
   }
 }

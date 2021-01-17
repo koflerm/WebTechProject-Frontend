@@ -37,9 +37,6 @@ export class ProductComponent implements OnInit {
   ngOnInit() {
     this.productService.getProductById(this.productId).subscribe((product: Product) => {
       this.product = product;
-      this.ratingService.getAverageRatingForProduct(product).subscribe((rating) => {
-        this.averageRating = rating;
-      });
       this.ratingService.getRatingsForProduct(product).subscribe((ratings: Array<Rating>) => {
         this.ratings = ratings;
       });
@@ -50,11 +47,7 @@ export class ProductComponent implements OnInit {
   }
 
   addRating(rating: Rating) {
-    console.log(rating);
     this.ratings.push(rating);
-    this.ratingService.getAverageRatingForProduct(this.product!).subscribe((rating) => {
-      this.averageRating = rating;
-    });
   }
 
   addToShoppingCard(product: Product) {

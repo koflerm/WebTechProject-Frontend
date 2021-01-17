@@ -30,7 +30,7 @@ export class RatingFormComponent implements OnInit {
   }
 
   createRating(): void {
-    this.ratingService.createRatingForProduct(this.rating!).subscribe((created) => {
+    this.ratingService.createRatingForProduct(this.rating!).subscribe((rating) => {
       this.rated = true;
       this.onCreateRating?.emit(this.rating);
     })

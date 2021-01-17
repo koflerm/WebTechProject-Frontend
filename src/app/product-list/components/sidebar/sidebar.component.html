@@ -1,7 +1,21 @@
 <div *ngIf="categories" class="d-flex flex-md-grow-1 sidebar">
   <div class="flex-grow-1 list-group list-group-flush bg-white shadow-sm">
-    <div class="list-group-item"><input class="form-control" name="search" [(ngModel)]="searchText" type="text" placeholder="Search for product..." (input)="searchForName()"/></div>
-    <button class="list-group-item list-group-item-action" (click)="filterForCategory(undefined)">All Categories</button>
-    <button *ngFor="let category of categories" class="list-group-item list-group-item-action" (click)="filterForCategory(category)">{{ category.name }}</button>
+    <div class="list-group-item">
+      <input class="form-control" name="search" [(ngModel)]="currentName" type="text" placeholder="Search for product name..." (input)="updateFilter()"/><hr>
+      <input class="form-control" name="description" [(ngModel)]="currentDescription" type="text" placeholder="Search for description..." (input)="updateFilter()"/><hr>
+      <div class="form-group">
+        <label for="formControlMinPrice">Min Price (Current Value: {{ currentMinPrice }})</label>
+        <input type="range" class="form-control-range" [(ngModel)]="currentMinPrice" id="formControlMinPrice" min="1" max="10000" (change)="updateFilter()">
+      </div><hr>
+      <div class="form-group">
+        <label for="formControlMaxPrice">Max Price (Current Value: {{ currentMaxPrice }})</label>
+        <input type="range" class="form-control-range" [(ngModel)]="currentMaxPrice" id="formControlMaxPrice" min="1" max="10000" (change)="updateFilter()">
+      </div><hr>
+      <label for="formControlCategories">Category</label>
+      <select id="formControlCategories" class="form-control" [(ngModel)]="currentCategory" (change)="updateFilter()">
+        <option value="">All categories</option>
+        <option value="{{ category.name }}" *ngFor="let category of categories">{{ category.name }}</option>
+      </select>
+    </div>
   </div>
 </div>

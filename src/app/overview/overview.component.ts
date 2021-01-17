@@ -59,16 +59,4 @@ export class OverviewComponent {
       this.products = products;
     })
   }
-  
-  calculateRatingStars(rating: number): Array<number> {
-    return Array(Math.round(rating)).fill(4);
-  }
-
-  calculateGreyStars(rating: number): Array<number> {
-    return Array(5 - Math.round(rating)).fill(4);
-  }
-
-  getAverageRating(product: Product): Observable<number> {
-    return this.ratingService.getAverageRatingForProduct(product)
-  }
 }

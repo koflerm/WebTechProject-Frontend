@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Order } from 'src/app/models/order';
 import { Product } from 'src/app/models/product';
 import { User } from 'src/app/models/user';
@@ -9,13 +11,9 @@ import { User } from 'src/app/models/user';
 })
 export class OrderService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  public createOrder(products: Product[], user: User): Observable<Order> {
-    return new Observable<Order>((subscribers) => {
-      let order = new Order("", "Placed", user, products)
-      subscribers.next(order);
-      subscribers.complete();
-    })
+  public createOrder(product: Product, user: User): Observable<Order> {
+    return this.http.post('https://webtech.danidipp.com/orders', { time: new Date(), status: "New Order", product_id: product.id}, { headers: { Authorization: `Bearer ${sessionStorage.getItem('userJWT')}` }}).pipe(map((response: any) => response.order));
   }
 }
