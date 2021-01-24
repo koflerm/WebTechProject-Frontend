@@ -8,6 +8,10 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 This project can be found using the following link: https://webtec-frontend.herokuapp.com/ (The website might not immediately react as this is a free dyno hosted by heroku.com which means it has to spin up first if it has been idle).
 
+## Installation
+
+To run this application, execute 'npm install'. After that you can run a development server using 'ng serve' or 'npm run ng serve'.
+
 ## Source Code
 
 The source code can be found using the following link: https://github.com/koflerm/WebTechProject-Frontend.
