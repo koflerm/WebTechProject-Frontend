@@ -1,6 +1,6 @@
-# Webtechnologies Course 2020/21 Frontend
+# Webtechnologies Course 2020/21 Project - Frontend
 
-This project is the frontend for a university project. It has been written in Angular and only works if the backend URL is reachable.
+This project is the frontend for a university project. It has been written in Angular and depends on the backend written by my colleague. This repository only includes the frontend.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.5.
 
