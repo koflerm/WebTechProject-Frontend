@@ -55,7 +55,7 @@ export class OverviewComponent {
   }
 
   ngOnInit(): void {
-    this.productService.getProducts().subscribe((products) => {
+    this.productService.getTopRatedProducts().subscribe((products) => {
       this.products = products;
     })
   }
