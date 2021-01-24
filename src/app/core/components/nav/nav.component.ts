@@ -30,9 +30,15 @@ export class NavComponent implements OnInit {
     this.userService.userNotifier().subscribe((user) => {
       this.user = user;
       this.router.navigate(['overview']);
+    },
+    (err) => {
+      console.log(`Error retreiving user: ${err.message}`)
     });
     this.shoppingCartService.shoppingCartNotifier().subscribe(shopppingCart => {
       this.shoppingCart = shopppingCart;
+    },
+    (err) => {
+      console.log(`Error retreiving shopping card products: ${err.message}`)
     });
   }
 

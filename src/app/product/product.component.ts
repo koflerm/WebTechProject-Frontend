@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../core/services/product.service';
 import { Product } from '../models/product';
 import { RatingService } from '../core/services/rating.service';
@@ -39,10 +39,19 @@ export class ProductComponent implements OnInit {
       this.product = product;
       this.ratingService.getRatingsForProduct(product).subscribe((ratings: Array<Rating>) => {
         this.ratings = ratings;
+      },
+      (err) => {
+        console.log(`Error retreiving ratings for product: ${err.message}`)
       });
+    },
+    (err) => {
+      console.log(`Error retreiving product: ${err.message}`)
     })
     this.userService.userNotifier().subscribe((user) => {
       this.user = user;
+    },
+    (err) => {
+      console.log(`Error retreiving user: ${err.message}`)
     })
   }
 

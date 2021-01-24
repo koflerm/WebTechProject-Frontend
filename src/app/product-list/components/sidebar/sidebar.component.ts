@@ -25,6 +25,9 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
     this.categoryService.getCategories().subscribe((categories) => {
       this.categories = categories;
+    },
+    (err) => {
+      console.log(`Error retreiving categories: ${err.message}`)
     })
   }
 

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
-import { UnsubscriptionError } from 'rxjs';
+import { ModalService } from 'src/app/core/services/modal.service';
 import { RatingService } from 'src/app/core/services/rating.service';
 import { Product } from 'src/app/models/product';
 import { Rating } from 'src/app/models/rating';
@@ -19,13 +19,15 @@ export class RatingFormComponent implements OnInit {
   @Output() onCreateRating: EventEmitter<Rating>;
   rated: boolean;
 
-  constructor(private ratingService: RatingService) { 
+  constructor(
+    private ratingService: RatingService,
+    private modalService: ModalService
+  ) { 
     this.onCreateRating = new EventEmitter();
     this.rated = false;
   }
 
   ngOnInit(): void {
-    // LEARNING: Input parameters are not bound in the constructor yet. Move usage to ngOnInit.
     this.rating = new Rating(0, this.user, this.product)
   }
 
@@ -33,6 +35,13 @@ export class RatingFormComponent implements OnInit {
     this.ratingService.createRatingForProduct(this.rating!).subscribe((rating) => {
       this.rated = true;
       this.onCreateRating?.emit(this.rating);
+    },
+    (err) => {
+      if (err.status == 409) {
+        this.modalService.openModal(`You cannot rate a product twice`);
+      } else {
+        console.log(`Error creating rating for product: ${err.message}`)
+      }
     })
   }
 

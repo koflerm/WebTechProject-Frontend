@@ -29,6 +29,9 @@ export class ShoppingCartComponent implements OnInit {
       if (this.shoppingCart) {
         this._calculateTotalPrice();
       }
+    },
+    (err) => {
+      console.log(`Error retreiving shopping card items: ${err.message}`)
     })
   }
 

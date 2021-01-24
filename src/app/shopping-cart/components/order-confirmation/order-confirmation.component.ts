@@ -26,6 +26,9 @@ export class OrderConfirmationComponent implements OnInit {
   ngOnInit(): void {
     this.userService.userNotifier().subscribe((user) => {
       this.user = user;
+    },
+    (err) => {
+      console.log(`Error retreiving user: ${err.message}`)
     });
   }
 
@@ -39,6 +42,9 @@ export class OrderConfirmationComponent implements OnInit {
           this.shoppingCardService.clearShoppingCart();
           this.modal.close(order);
         }
+      },
+      (err) => {
+        console.log(`Error creating order: ${err.message}`)
       });
     }
   }

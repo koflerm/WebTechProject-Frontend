@@ -4,8 +4,7 @@ import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { ProductService } from '../core/services/product.service';
 import { Product } from '../models/product';
 import { RatingService } from '../core/services/rating.service';
-import { Rating } from '../models/rating';
-import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-overview',
@@ -24,12 +23,7 @@ export class OverviewComponent {
   carousel!: NgbCarousel;
 
   constructor(private productService: ProductService, private ratingService: RatingService) {
-    this.images = [
-      { src: 'assets/img/handshake.jpg', title: 'Trusted by 1.000.000+ customers' },
-      { src: 'https://wallpapercrafter.com/desktop/292420-dog-friendship-nature-trust-labrador-snout.jpg', title: 'We like dogs.' },
-      { src: 'https://pixelz.cc/wp-content/uploads/2018/09/digital-security-lock-uhd-4k-wallpaper.jpg', title: 'Your data is highly secured.' },
-      { src: 'https://www.itl.cat/pngfile/big/303-3032161_donald-trump-wallpaper-background-kim-jong-un-ok.jpg', title: 'Recommended by celebrities.' }
-    ];
+    this.images = environment.overviewImages;
     this.paused = false;
     this.unpauseOnArrow = false;
     this.pauseOnIndicator = false;
@@ -57,6 +51,9 @@ export class OverviewComponent {
   ngOnInit(): void {
     this.productService.getTopRatedProducts().subscribe((products) => {
       this.products = products;
+    },
+    (err) => {
+      console.log(`Error retreiving products: ${err.message}`)
     })
   }
 }

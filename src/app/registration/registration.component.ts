@@ -41,6 +41,9 @@ export class RegistrationComponent implements OnInit {
     } else {
       this.userService.registerUser(this.newUser).subscribe((user: User) => {
         this.modalService.openModal(`Welcome to Trustmart ${user.name}!`, 'overview');
+      },
+      (err) => {
+        console.log(`Error registering user: ${err.message}`)
       })
     }
   }
