@@ -25,7 +25,7 @@ export class ProductListComponent implements OnInit {
       this.products = products;
     },
     (err) => {
-      console.log(`Error retreiving products: ${err.message}`)
+      console.log(`Error retrieving products: ${err.message}`)
     });
   }
 
@@ -34,7 +34,7 @@ export class ProductListComponent implements OnInit {
       this.products = products;
     },
     (err) => {
-      console.log(`Error retreiving products: ${err.message}`)
+      console.log(`Error retrieving products: ${err.message}`)
     });
   }
 }

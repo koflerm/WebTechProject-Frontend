@@ -41,17 +41,17 @@ export class ProductComponent implements OnInit {
         this.ratings = ratings;
       },
       (err) => {
-        console.log(`Error retreiving ratings for product: ${err.message}`)
+        console.log(`Error retrieving ratings for product: ${err.message}`)
       });
     },
     (err) => {
-      console.log(`Error retreiving product: ${err.message}`)
+      console.log(`Error retrieving product: ${err.message}`)
     })
     this.userService.userNotifier().subscribe((user) => {
       this.user = user;
     },
     (err) => {
-      console.log(`Error retreiving user: ${err.message}`)
+      console.log(`Error retrieving user: ${err.message}`)
     })
   }
 

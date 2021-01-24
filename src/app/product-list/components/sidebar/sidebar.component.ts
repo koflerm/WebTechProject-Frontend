@@ -27,7 +27,7 @@ export class SidebarComponent implements OnInit {
       this.categories = categories;
     },
     (err) => {
-      console.log(`Error retreiving categories: ${err.message}`)
+      console.log(`Error retrieving categories: ${err.message}`)
     })
   }
 

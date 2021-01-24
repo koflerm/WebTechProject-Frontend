@@ -28,7 +28,7 @@ export class OrderConfirmationComponent implements OnInit {
       this.user = user;
     },
     (err) => {
-      console.log(`Error retreiving user: ${err.message}`)
+      console.log(`Error retrieving user: ${err.message}`)
     });
   }
 

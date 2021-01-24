@@ -31,7 +31,7 @@ export class ShoppingCartComponent implements OnInit {
       }
     },
     (err) => {
-      console.log(`Error retreiving shopping card items: ${err.message}`)
+      console.log(`Error retrieving shopping card items: ${err.message}`)
     })
   }
 
